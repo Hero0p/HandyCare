@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #header {
+            background-color: #f1f1f1;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #searchBar {
+            margin: 10px 0;
+            padding: 10px;
+            width: 70%; /* Adjust the width as needed */
+            box-sizing: border-box;
+            border: 2px solid #ccc; /* Adjust the border width and color as needed */
+            border-radius: 5px;
+        }
+
+        #plusButton {
+            background-color: #3498db; /* Blue color */
+            color: white;
+            border: none;
+            padding: 12px 25px; /* Adjust padding for size */
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px; /* Adjust font size for size */
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #plusButton:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        #formPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #f1f1f1;
+            z-index: 1;
+        }
+
+        #formTable {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        #formTable th,
+        #formTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #formTable th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #formTable input,
+        #formTable textarea,
+        #formTable select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #postButton {
+            background-color: #3498db; /* Blue color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #postButton:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        #communityDetails {
+            width: 70%;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        .communityEntry {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .communityTitle {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .communityDescription {
+            margin-bottom: 8px;
+        }
+
+        .communityTags {
+            font-style: italic;
+            margin-bottom: 8px;
+        }
+
+        .feelings {
+            margin-bottom: 8px;
+        }
+
+        .photoUpload,
+        .videoUpload {
+            margin-bottom: 8px;
+        }
+
+        .interactions {
+            display: flex;
+            align-items: center;
+        }
+
+        .voteButtons {
+            margin-right: 10px;
+        }
+
+        .joinButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .upvoteIcon,
+        .downvoteIcon {
+            font-size: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Responsive Comment Section */
+        .commentSection {
+            width: 100%;
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .comment {
+            margin-bottom: 10px;
+        }
+
+        .commenterName {
+            font-weight: bold;
+        }
+
+        .commentText {
+            margin-top: 5px;
+        }
+
+        /* Hidden by default */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <input type="text" id="searchBar" placeholder="Search...">
+        <button id="plusButton" onclick="openForm()">+ Post</button>
+    </div>
+
+    <div id="formPopup">
+        <span class="close" onclick="closeForm()">&times;</span>
+        <table id="formTable">
+            <tr>
+                <th>Details</th>
+                <th>Input</th>
+            </tr>
+            <tr>
+                <td>How are you feeling?</td>
+                <td><input type="text" id="feelings"></td>
+            </tr>
+            <tr>
+                <td>Upload Photos:</td>
+                <td><input type="file" id="photoUpload" accept="image/*" multiple></td>
+            </tr>
+            <tr>
+                <td>Upload Videos:</td>
+                <td><input type="file" id="videoUpload" accept="video/*"></td>
+            </tr>
+            <tr>
+                <td>Tags:</td>
+                <td><input type="text" id="communityTags"></td>
+            </tr>
+        </table>
+        <button id="postButton" onclick="postCommunity()">Post</button>
+    </div>
+
+    <div id="communityDetails"></div>
+
+    <script>
+        function openForm() {
+            document.getElementById("formPopup").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("formPopup").style.display = "none";
+        }
+
+        function postCommunity() {
+            // Get values from the form
+            var feelings = document.getElementById("feelings").value;
+            var photoUpload = document.getElementById("photoUpload").files;
+            var videoUpload = document.getElementById("videoUpload").files;
+            var tags = document.getElementById("communityTags").value;
+
+            // Create a new community entry
+            var communityEntry = document.createElement("div");
+            communityEntry.className = "communityEntry";
+            communityEntry.innerHTML = `
+                <div class="feelings">${feelings}</div>
+                <div class="photoUpload"></div>
+                <div class="videoUpload">${formatFiles(videoUpload)}</div>
+                <div class="communityTags">${tags}</div>
+                <div class="interactions">
+                    <div class="voteButtons">
+                        <span class="upvoteIcon" data-count="0" onclick="upvoteCommunity(this)">👍 0</span>
+                        <span class="downvoteIcon" data-count="0" onclick="downvoteCommunity(this)">👎 0</span>
+                    </div>
+                    <button class='joinButton' onclick="toggleCommentSection(this)">Comment</button>
+                </div>
+                <div class="commentSection hidden">
+                    <input type="text" class="commentInput" placeholder="Add a comment...">
+                    <button class="postCommentButton" onclick="postComment(this)">Post</button>
+                </div>
+            `;
+
+            // Append the community entry to the community details section
+            document.getElementById("communityDetails").appendChild(communityEntry);
+
+            // Display uploaded photos
+            displayUploadedPhotos(photoUpload, communityEntry.querySelector(".photoUpload"));
+
+            // Close the form popup
+            closeForm();
+        }
+
+        // Function to display uploaded photos as image previews
+        function displayUploadedPhotos(files, targetElement) {
+            if (files.length === 0) return;
+            for (var i = 0; i < files.length; i++) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img = document.createElement("img");
+                    img.src = e.target.result;
+                    img.style.maxWidth = "100px"; // Adjust as needed
+                    img.style.maxHeight = "100px"; // Adjust as needed
+                    targetElement.appendChild(img);
+                }
+                reader.readAsDataURL(files[i]);
+            }
+        }
+
+        function formatFiles(files) {
+            if (files.length === 0) return "";
+            var fileList = "<ul>";
+            for (var i = 0; i < files.length; i++) {
+                fileList += "<li>" + files[i].name + "</li>";
+            }
+            fileList += "</ul>";
+            return fileList;
+        }
+
+        function upvoteCommunity(icon) {
+            var upvoteCount = parseInt(icon.dataset.count) || 0;
+            var downvoteCount = parseInt(icon.nextElementSibling.dataset.count) || 0;
+
+            // Increase upvote count
+            upvoteCount++;
+            icon.dataset.count = upvoteCount;
+            icon.innerHTML = `👍 ${upvoteCount}`;
+
+            // Reset downvote count
+            downvoteCount = 0;
+            icon.nextElementSibling.dataset.count = downvoteCount;
+            icon.nextElementSibling.innerHTML = `👎 ${downvoteCount}`;
+        }
+
+        function downvoteCommunity(icon) {
+            var upvoteCount = parseInt(icon.previousElementSibling.dataset.count) || 0;
+            var downvoteCount = parseInt(icon.dataset.count) || 0;
+
+            // Decrease upvote count
+            upvoteCount = Math.max(0, upvoteCount - 1);
+            icon.previousElementSibling.dataset.count = upvoteCount;
+            icon.previousElementSibling.innerHTML = `👍 ${upvoteCount}`;
+
+            // Increase downvote count
+            downvoteCount++;
+            icon.dataset.count = downvoteCount;
+            icon.innerHTML = `👎 ${downvoteCount}`;
+        }
+
+        function toggleCommentSection(button) {
+            var commentSection = button.parentElement.nextElementSibling;
+            commentSection.classList.toggle("hidden");
+        }
+
+        function postComment(button) {
+            var commentInput = button.parentElement.querySelector(".commentInput");
+            var commentText = commentInput.value;
+            if (commentText.trim() !== "") {
+                var commenterName = "Anonymous"; // You can replace this with the actual commenter's name
+                var commentSection = button.parentElement.parentElement;
+                var comment = document.createElement("div");
+                comment.className = "comment";
+                comment.innerHTML = `
+                    <span class="commenterName">${commenterName}</span>: 
+                    <span class="commentText">${commentText}</span>
+                `;
+                commentSection.appendChild(comment);
+                commentInput.value = ""; // Clear the input field after posting the comment
+            }
+        }
+    </script>
+
+</body>
+</html>

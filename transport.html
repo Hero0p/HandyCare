@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Transportation Prototype</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1, h2, p {
+            font-weight: bold; /* Make headings and paragraphs bold */
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+        .userButton {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+</head>
+<body>
+    <h1>Accessible Transportation Information</h1>
+    <p>Welcome to our accessible transportation prototype. Here you can find information about accessible transportation options in your area.</p>
+
+    <h2>Interactive Map</h2>
+    <div id="map"></div>
+    <button class="userButton" onclick="provideFeedback()">Provide Feedback</button>
+
+    <h2>User Feedback and Reviews</h2>
+    <p>Share your experience with different transportation services to help others make informed decisions.</p>
+
+    <h2>Real-time Transit Updates</h2>
+    <button class="userButton" onclick="getTransitUpdates()">Get Transit Updates</button>
+    <p>Stay informed about accessible public transit routes, including real-time updates on delays and alternative accessible routes.</p>
+
+    <h2>Accessibility Guidelines</h2>
+    <button class="userButton" onclick="learnAccessibility()">Learn Accessibility Guidelines</button>
+    <p>Learn about accessibility guidelines and regulations for transportation services to understand your rights and the standards you can expect.</p>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Create the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // Add a tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Add a marker for an accessible transportation service
+        var marker = L.marker([51.5, -0.09]).addTo(map);
+        marker.bindPopup("<b>Accessible Transportation Service</b><br>Address: 123 Main St<br>Phone: 555-1234").openPopup();
+
+        // Function to provide feedback
+        function provideFeedback() {
+            alert("Thank you for providing your feedback!");
+        }
+
+        // Function to get transit updates
+        function getTransitUpdates() {
+            alert("Transit updates will be displayed here.");
+        }
+
+        // Function to learn accessibility guidelines
+        function learnAccessibility() {
+            alert("Learn about accessibility guidelines and regulations here.");
+        }
+    </script>
+</body>
+</html>

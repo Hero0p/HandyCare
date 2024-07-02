@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Contact Us </title>
+    <link rel="stylesheet" href="contact.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <header class="header">
+      <nav class="navbar">
+        
+        <ul class="links">
+          <li><a href="{{ url_for('index') }}">Home</a></li>
+          <li><a href="{{ url_for('about') }}">About Us</a></li>
+          <li><a href="{{ url_for('services') }}">Services</a></li>
+          <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+        </ul>
+        <div class="buttons">
+          <a href="{{ url_for('sign_in') }}" class="signin">Sign In</a>
+          <a href="{{ url_for('signup') }}" class="signup">Sign Up</a>
+        </div>
+      </nav>
+    </header>
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="left-side">
+        <div class="address details">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="topic">Address</div>
+          <div class="text-one">BU , Greater Noida</div>
+          <div class="text-two">Uttar Pradesh</div>
+        </div>
+        <div class="phone details">
+          <i class="fas fa-phone-alt"></i>
+          <div class="topic">Phone</div>
+          <div class="text-one">+91 62654 24813</div>
+          <div class="text-two">+91 84500 76426</div>
+        </div>
+        <div class="email details">
+          <i class="fas fa-envelope"></i>
+          <div class="topic">Email</div>
+          <div class="text-one"><a href="mailto:nishantchaudhary03115.com">handyhelpdesk@gmail.com</a></div>
+          <div class="text-two"><a href="mailto:nishantchaudhary03115.com">info.handycare@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="right-side">
+        <div class="topic-text">Send us a message</div>
+        <p>Have a question, suggestion, or need assistance? 
+            We're here to help! Feel free to Contact our team any time and we'll get back to you as soon as possible!!.</p>
+      <form action="#">
+        <div class="input-box">
+          <input type="text" placeholder="Enter your name">
+        </div>
+        <div class="input-box">
+          <input type="text" placeholder="Enter your email">
+        </div>
+        <div class="input-box message-box">
+            <input type="text" placeholder="Enter your message">
+        </div>
+        <div class="button">
+          <input type="button" value="Send Now" >
+        </div>
+      </form>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

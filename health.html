@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracking Calculator</title>
+    <link rel="stylesheet" href="health.css">
+</head>
+<body>
+    <header>
+        <h1>Health Tracking Calculator</h1>
+    </header>
+    <div class="container">
+        <section class="health-data">
+            <h2>Health Ledger</h2>
+            <form id="healthForm">
+                <!-- Health tracking inputs -->
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" name="weight" required>
+                <label for="bloodPressure">Blood Pressure (mmHg):</label>
+                <input type="text" id="bloodPressure" name="bloodPressure" required>
+                
+                <button type="submit">Update</button>
+            </form>
+        </section>
+        <section class="hospital-search">
+            <h2>Find Nearby Hospitals</h2>
+            <input type="text" id="hospitalSearch" placeholder="Enter location">
+            <button id="searchButton">Search</button>
+            <div id="hospitalResults">
+                <!-- Hospital search results will be displayed here -->
+            </div>
+        </section>
+        <section class="doctor-appointment">
+            <h2>Schedule Doctor Appointment</h2>
+            <label for="appointmentDate">Appointment Date:</label>
+            <input type="date" id="appointmentDate" name="appointmentDate">
+            <label for="appointmentTime">Appointment Time:</label>
+            <input type="time" id="appointmentTime" name="appointmentTime">
+            <button id="scheduleButton">Schedule</button>
+        </section>
+    </div>
+
+    <script src="health.js"></script>
+</body>
+</html>
